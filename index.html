@@ -176,8 +176,39 @@
     .fcopy{font-family:"Share Tech Mono",monospace;font-size:.58rem;color:var(--muted);letter-spacing:.08em}
     .ftag{font-family:"Share Tech Mono",monospace;font-size:.58rem;color:var(--dim);letter-spacing:.1em}
 
-    @media(max-width:900px){.bg{grid-template-columns:1fr}.nw{columns:2}}
-    @media(max-width:600px){nav{padding:.75rem 1.25rem}.nav-links{gap:.8rem}.nav-links a{font-size:.56rem}.sw{padding:4rem 1.25rem}.nw{columns:1}footer{flex-direction:column;gap:1rem;text-align:center}}
+    /* GALLERY */
+    .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1rem}
+    .gallery-item{position:relative;overflow:hidden;background:var(--card);border:1px solid var(--muted);aspect-ratio:4/3;cursor:pointer;transition:border-color .2s}
+    .gallery-item:hover{border-color:var(--gold)}
+    .gallery-item img{width:100%;height:100%;object-fit:cover;filter:sepia(.3) brightness(.8);transition:filter .3s}
+    .gallery-item:hover img{filter:sepia(0) brightness(1)}
+    .gallery-label{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(8,10,11,.9));padding:.75rem;font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.1em}
+
+    /* LOGIN OVERLAY */
+    #agent-lock{position:absolute;inset:0;background:rgba(8,10,11,.96);z-index:10;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;padding:2rem}
+    #agent-lock.unlocked{display:none}
+    .lock-title{font-family:'Orbitron',sans-serif;font-size:1rem;font-weight:700;color:var(--gold);letter-spacing:.15em}
+    .lock-input{background:var(--panel);border:1px solid var(--muted);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.8rem;padding:.6rem 1rem;width:100%;max-width:280px;outline:none;transition:border-color .2s}
+    .lock-input:focus{border-color:var(--gold)}
+    .lock-btn{font-family:'Orbitron',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;color:#000;background:var(--gold);border:none;padding:.7rem 2rem;cursor:pointer;transition:opacity .2s}
+    .lock-btn:hover{opacity:.85}
+    .lock-err{font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--red);letter-spacing:.1em;display:none}
+
+    @media(max-width:900px){
+      .bg{grid-template-columns:1fr}
+      .nw{columns:2}
+      .hero-photo{width:100%;right:0;bottom:0;top:auto;height:65%;opacity:.5}
+      .hero-photo img{object-position:top center;-webkit-mask-image:linear-gradient(to top,rgba(0,0,0,.8) 30%,transparent 100%);mask-image:linear-gradient(to top,rgba(0,0,0,.8) 30%,transparent 100%);-webkit-mask-composite:source-over;mask-composite:add}
+    }
+    @media(max-width:600px){
+      nav{padding:.75rem 1.25rem}
+      .nav-links{gap:.8rem}
+      .nav-links a{font-size:.56rem}
+      .sw{padding:4rem 1.25rem}
+      .nw{columns:1}
+      footer{flex-direction:column;gap:1rem;text-align:center}
+      .hero-photo{height:55%}
+    }
   </style>
 </head>
 <body>
@@ -198,6 +229,7 @@
     <li><a href="#youtube">YouTube</a></li>
     <li><a href="#eventos">Eventos</a></li>
     <li><a href="#agente">Agente</a></li>
+    <li><a href="#galeria">Galería</a></li>
     <li><a href="#booking">Booking</a></li>
   </ul>
 </nav>
@@ -466,6 +498,41 @@
       <div class="tli"><div class="tly">2003</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">ARTERIA RECORDS</div><div class="tldc">Primer contrato de representación. Productora del Loveparade (Av. Reforma, 20,000 pax) y Toltécnica en Teotihuacán.</div></div></div>
       <div class="tli"><div class="tly">2004</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">LOVEPARADE MX 2004</div><div class="tldc">Av. Paseo de la Reforma, CDMX. Uno de los eventos electrónicos más icónicos de la historia de México.</div></div></div>
       <div class="tli"><div class="tly">HOY</div><div class="tls"><div class="tld" style="background:var(--lime);box-shadow:0 0 14px var(--lime)"></div></div><div><div class="tlt" style="color:var(--lime)">ÚLTIMAS RESIDENCIAS · MÉRIDA</div><div class="tldc">Ancestro MX · Confessions · Classico Peninsula · Ignoto · Azotea · Vanite · Vientooo · Casa Revo. Producción activa en sellos nacionales e internacionales.</div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- PRÓXIMOS EVENTOS (after bio) -->
+<section id="eventos" style="background:var(--panel)"><div class="sw">
+  <div class="sh"><span class="sn mono">01B / AGENDA</span><h2 class="st">Próximos <span class="gold">Eventos</span></h2><div class="sl"></div></div>
+  <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:2rem">// JUNIO · JULIO 2026 · SEÑAL ACTIVA</p>
+  <div style="display:flex;flex-direction:column;gap:.75rem">
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--lime);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--lime);line-height:1">12<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div><div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">VANTA ROOM</div><div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">CAMPECHE · MX</div></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--lime);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1">17<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div><div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">SALA SALA</div><div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">MÉRIDA · MX &nbsp;·&nbsp; <span style="color:var(--gold)">VINYL SET</span></div></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--cyan);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--cyan);line-height:1">26<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div><div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">LADY LEE ROOFTOP</div><div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">GUADALAJARA · MX</div></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--cyan);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1">27<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div><div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">TEMPO</div><div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">QUERÉTARO · MX</div></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+    <div style="background:var(--card);border:1px solid rgba(255,119,0,0.3);border-left:3px solid #ff7700;padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem;opacity:.75">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:#ff7700;line-height:1">TBC<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUL</span></div>
+      <div><div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">POR CONFIRMAR</div><div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">GUADALAJARA · MX</div></div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:#ff7700;letter-spacing:.15em">TBC ◌</div>
     </div>
   </div>
 </div></section>
@@ -753,62 +820,6 @@
 
 <div class="div"></div>
 
-<!-- PRÓXIMOS EVENTOS -->
-<section id="eventos"><div class="sw">
-  <div class="sh"><span class="sn mono">09 / AGENDA</span><h2 class="st">Próximos <span class="gold">Eventos</span></h2><div class="sl"></div></div>
-  <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:2rem">// JUNIO 2026 · SEÑAL ACTIVA</p>
-  <div style="display:flex;flex-direction:column;gap:.75rem">
-
-    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--lime);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
-      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--lime);line-height:1">12<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
-      <div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">VANTA ROOM</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">CAMPECHE · MX</div>
-      </div>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--lime);letter-spacing:.15em">CONFIRMED ◉</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
-      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1">17<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
-      <div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">SALA SALA</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">MÉRIDA · MX &nbsp;·&nbsp; <span style="color:var(--gold)">VINYL SET</span></div>
-      </div>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.15em">CONFIRMED ◉</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--cyan);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
-      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--cyan);line-height:1">26<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
-      <div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">LADY LEE ROOFTOP</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">GUADALAJARA · MX</div>
-      </div>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--cyan);letter-spacing:.15em">CONFIRMED ◉</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
-      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1">27<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
-      <div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">TEMPO</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">QUERÉTARO · MX</div>
-      </div>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.15em">CONFIRMED ◉</div>
-    </div>
-
-    <div style="background:var(--card);border:1px solid rgba(255,119,0,0.3);border-left:3px solid var(--orange,#ff7700);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem;opacity:.75">
-      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:#ff7700;line-height:1">TBC<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUL</span></div>
-      <div>
-        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">POR CONFIRMAR</div>
-        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">GUADALAJARA · MX</div>
-      </div>
-      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:#ff7700;letter-spacing:.15em">TBC ◌</div>
-    </div>
-
-  </div>
-</div></section>
-
-<div class="div"></div>
-
 <!-- BOOKING CHATBOT -->
 <section id="agente" style="background:var(--panel)"><div class="sw">
   <div class="sh"><span class="sn mono">10 / AGENTE</span><h2 class="st">Booking <span class="gold">Agent AI</span></h2><div class="sl"></div></div>
@@ -818,7 +829,19 @@
   </p>
 
   <!-- Chat UI -->
-  <div style="background:var(--card);border:1px solid var(--muted);overflow:hidden;max-width:800px">
+  <div style="background:var(--card);border:1px solid var(--muted);overflow:hidden;max-width:800px;position:relative">
+
+    <!-- LOGIN LOCK -->
+    <div id="agent-lock">
+      <div style="font-size:2rem;margin-bottom:.5rem">🔒</div>
+      <div class="lock-title">ACCESO RESTRINGIDO</div>
+      <p class="mono" style="font-size:.6rem;color:var(--dim);letter-spacing:.1em;text-align:center">// AGENTE PRIVADO · SOLO AUTORIZADO</p>
+      <input id="lock-email" class="lock-input" type="email" placeholder="Email" autocomplete="off" />
+      <input id="lock-pass" class="lock-input" type="password" placeholder="Password" onkeydown="if(event.key==='Enter')unlockAgent()" />
+      <div id="lock-err" class="lock-err">◈ CREDENCIALES INCORRECTAS</div>
+      <button class="lock-btn" onclick="unlockAgent()">ACCEDER</button>
+    </div>
+
     <!-- Chat header -->
     <div style="background:var(--panel);border-bottom:1px solid var(--muted);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem">
       <div style="width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime);animation:pdot 1.5s ease-in-out infinite"></div>
@@ -855,6 +878,19 @@
 </div></section>
 
 <script>
+function unlockAgent(){
+  const email = document.getElementById('lock-email').value.trim().toLowerCase();
+  const pass = document.getElementById('lock-pass').value;
+  const err = document.getElementById('lock-err');
+  if(email === 'djchap@gmail.com' && pass === '8aCarlos'){
+    document.getElementById('agent-lock').classList.add('unlocked');
+    err.style.display = 'none';
+  } else {
+    err.style.display = 'block';
+    document.getElementById('lock-pass').value = '';
+  }
+}
+
 const AGENT_SYSTEM = `You are a professional booking agent AI assistant for CHAP (Carlos Ochoa), a DJ and producer based in Mérida, Yucatán, Mexico.
 
 ARTIST PROFILE:
@@ -957,6 +993,48 @@ async function sendAgent() {
   }
 }
 </script>
+
+<div class="div"></div>
+
+<!-- GALERÍA -->
+<section id="galeria"><div class="sw">
+  <div class="sh"><span class="sn mono">11 / GALERÍA</span><h2 class="st">Galería <span class="gold">Visual</span></h2><div class="sl"></div></div>
+  <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:2rem">// FOTOS · SETS · EVENTOS · Clic para abrir en Drive</p>
+  <div class="gallery-grid">
+    <div class="gallery-item" onclick="window.open('https://drive.google.com/drive/folders/190peLGKmUtefSFYbZegr4imwezGjpRdA','_blank')">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1114,#111619);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem">
+        <span style="font-size:2.5rem;filter:grayscale(.5)">📸</span>
+        <span style="font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--gold);letter-spacing:.12em">GALERÍA 01</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim)">ABRIR EN DRIVE ↗</span>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="window.open('https://drive.google.com/drive/folders/1dlLk4mE4rtl7NiUl5NUhNpwdEBszUKIL','_blank')">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#111619,#0d1114);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem">
+        <span style="font-size:2.5rem;filter:grayscale(.5)">📸</span>
+        <span style="font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--gold);letter-spacing:.12em">GALERÍA 02</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim)">ABRIR EN DRIVE ↗</span>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="window.open('https://drive.google.com/drive/folders/1PBb9PbUTvxq7J0B1zGEl-d_hjKg4xXaE','_blank')">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,#0d1114,rgba(200,168,75,.06));display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem">
+        <span style="font-size:2.5rem;filter:grayscale(.5)">📸</span>
+        <span style="font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--gold);letter-spacing:.12em">GALERÍA 03</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim)">ABRIR EN DRIVE ↗</span>
+      </div>
+    </div>
+    <div class="gallery-item" onclick="window.open('https://drive.google.com/drive/folders/1GxxqOSlX4ilA3DduQGmvOJVWjUQITXw2','_blank')">
+      <div style="width:100%;height:100%;background:linear-gradient(135deg,rgba(255,48,48,.05),#0d1114);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.75rem">
+        <span style="font-size:2.5rem">🎬</span>
+        <span style="font-family:'Orbitron',sans-serif;font-size:.72rem;color:var(--red);letter-spacing:.12em">VIDEOS</span>
+        <span style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim)">ABRIR EN DRIVE ↗</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<footer>
   <div class="flogo">CHAP</div>
   <div class="fcopy">© 2026 CARLOS OCHOA aka CHAP / CO8A · ALL RIGHTS RESERVED</div>
   <div class="ftag">THE FUTURE IS NEAR ◈</div>
