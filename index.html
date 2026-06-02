@@ -12,7 +12,7 @@
       --muted:#2a3540; --dim:#4a6070; --text:#c4d8e0; --white:#eef5f8;
     }
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-    html{scroll-behavior:smooth}
+    html{scroll-behavior:smooth;scroll-padding-top:0}
     body{background:var(--bg);color:var(--text);font-family:"Rajdhani",sans-serif;font-weight:400;overflow-x:hidden;cursor:crosshair}
     body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);pointer-events:none;z-index:9999}
     .mono{font-family:"Share Tech Mono",monospace}
@@ -27,45 +27,40 @@
 
     #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;background:#080a0b}
     #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
-    .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 20%,rgba(8,10,11,.65) 100%);z-index:1;pointer-events:none}
+    .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 35% 50%,transparent 20%,rgba(8,10,11,.7) 100%);z-index:1;pointer-events:none}
     /* CHAP holographic photo */
     .hero-photo{
       position:absolute;
-      right:0; bottom:0;
-      width:55%; max-width:680px;
+      right:0; top:0; bottom:0;
+      width:52%; max-width:720px;
       height:100%;
       z-index:1;
       pointer-events:none;
-      display:flex; align-items:flex-end; justify-content:flex-end;
     }
     .hero-photo img{
       width:100%; height:100%;
-      object-fit:contain; object-position:bottom right;
+      object-fit:cover; object-position:top center;
       opacity:0;
       mix-blend-mode:screen;
-      filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1);
+      filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.5) contrast(1.2);
       animation:photo-in 2s ease-out 0.5s forwards, photo-glitch 9s infinite 3s;
-      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 40%, transparent 100%);
-      mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 40%, transparent 100%);
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 50%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%);
+      -webkit-mask-composite: destination-in;
+      mask-image: linear-gradient(to left, rgba(0,0,0,0.9) 50%, transparent 100%), linear-gradient(to bottom, transparent 0%, black 8%);
+      mask-composite: intersect;
     }
     @keyframes photo-in{
-      0%{opacity:0;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.1) contrast(2);transform:translateX(20px)}
-      30%{opacity:.15;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.7) contrast(1.5)}
-      60%{opacity:.22}
-      100%{opacity:.28;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1);transform:translateX(0)}
+      0%{opacity:0;filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.05) contrast(2);transform:translateX(30px)}
+      40%{opacity:.12;filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.6) contrast(1.5)}
+      100%{opacity:.32;filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.5) contrast(1.2);transform:translateX(0)}
     }
     @keyframes photo-glitch{
-      0%,85%,100%{
-        opacity:.28;
-        clip-path:inset(0 0 0 0);
-        transform:translate(0,0);
-        filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1);
-      }
-      86%{clip-path:inset(8% 0 60% 0);transform:translate(-4px,0);filter:sepia(1) hue-rotate(180deg) saturate(2) brightness(0.8) contrast(2);opacity:.5}
-      87%{clip-path:inset(40% 0 20% 0);transform:translate(4px,0);filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55);opacity:.3}
-      88%{clip-path:inset(20% 0 50% 0);transform:translate(-2px,2px);filter:sepia(1) hue-rotate(90deg) saturate(1.5) brightness(1) contrast(2);opacity:.45}
-      89%{clip-path:inset(0 0 0 0);transform:translate(0,0);opacity:.15}
-      90%{clip-path:inset(0 0 0 0);transform:translate(0,0);opacity:.28;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1)}
+      0%,85%,100%{opacity:.32;clip-path:inset(0 0 0 0);transform:translate(0,0);filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.5) contrast(1.2)}
+      86%{clip-path:inset(8% 0 60% 0);transform:translate(-4px,0);filter:sepia(1) hue-rotate(180deg) saturate(2) brightness(0.9) contrast(2);opacity:.55}
+      87%{clip-path:inset(40% 0 20% 0);transform:translate(4px,0);filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.5);opacity:.28}
+      88%{clip-path:inset(20% 0 50% 0);transform:translate(-2px,2px);filter:sepia(1) hue-rotate(90deg) saturate(1.5) brightness(1) contrast(2);opacity:.5}
+      89%{clip-path:inset(0 0 0 0);transform:translate(0,0);opacity:.12}
+      90%{opacity:.32;filter:sepia(1) hue-rotate(5deg) saturate(0.35) brightness(0.5) contrast(1.2)}
     }
     @keyframes gbadge{0%,100%{box-shadow:0 0 8px rgba(200,168,75,.3)}50%{box-shadow:0 0 28px rgba(200,168,75,.65)}}
     .hero-name{font-family:"Orbitron",sans-serif;font-size:clamp(5rem,18vw,14rem);font-weight:900;line-height:.85;letter-spacing:.12em;color:var(--white);text-shadow:0 0 80px rgba(200,168,75,.18),0 0 160px rgba(200,168,75,.08);position:relative;z-index:2;margin-bottom:.5rem;animation:glitch 7s infinite}
@@ -196,6 +191,8 @@
     <li><a href="#escena">Escena</a></li>
     <li><a href="#transmisiones">Señal</a></li>
     <li><a href="#youtube">YouTube</a></li>
+    <li><a href="#eventos">Eventos</a></li>
+    <li><a href="#agente">Agente</a></li>
     <li><a href="#booking">Booking</a></li>
   </ul>
 </nav>
@@ -463,7 +460,7 @@
       <div class="tli"><div class="tly">1998</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">VINILO · HOUSE &amp; TECHNO</div><div class="tldc">Pasión por los vinilos lo lleva a los principales clubes de CDMX. Posicionamiento en el ranking nacional de DJs.</div></div></div>
       <div class="tli"><div class="tly">2003</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">ARTERIA RECORDS</div><div class="tldc">Primer contrato de representación. Productora del Loveparade (Av. Reforma, 20,000 pax) y Toltécnica en Teotihuacán.</div></div></div>
       <div class="tli"><div class="tly">2004</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">LOVEPARADE MX 2004</div><div class="tldc">Av. Paseo de la Reforma, CDMX. Uno de los eventos electrónicos más icónicos de la historia de México.</div></div></div>
-      <div class="tli"><div class="tly">HOY</div><div class="tls"><div class="tld" style="background:var(--lime);box-shadow:0 0 14px var(--lime)"></div></div><div><div class="tlt" style="color:var(--lime)">JEFE DE CABINA · MÉRIDA</div><div class="tldc">Residente en los principales venues del sureste mexicano. Producción activa en sellos nacionales e internacionales.</div></div></div>
+      <div class="tli"><div class="tly">HOY</div><div class="tls"><div class="tld" style="background:var(--lime);box-shadow:0 0 14px var(--lime)"></div></div><div><div class="tlt" style="color:var(--lime)">ÚLTIMAS RESIDENCIAS · MÉRIDA</div><div class="tldc">Ancestro MX · Confessions · Classico Peninsula · Ignoto · Azotea · Vanite · Vientooo · Casa Revo. Producción activa en sellos nacionales e internacionales.</div></div></div>
     </div>
   </div>
 </div></section>
@@ -633,6 +630,8 @@
     <div class="ni"><span>Ademarr</span></div>
     <div class="ni"><span>Itzone</span></div>
     <div class="ni"><span>Foty Cats</span> <small>(RUS)</small></div>
+    <div class="ni"><span>Pulsar</span></div>
+    <div class="ni"><span>Sean Toja</span></div>
     <div class="ni"><span>Manufactured Superstars</span></div>
     <div class="ni"><span>Klang</span> <small>(Loveparade Mayday)</small></div>
     <div class="ni"><span>Mauricio Alonzo</span> <small>(3B SOS Rec)</small></div>
@@ -743,7 +742,212 @@
   </div>
 </div></section>
 
-<footer>
+<div class="div"></div>
+
+<!-- PRÓXIMOS EVENTOS -->
+<section id="eventos"><div class="sw">
+  <div class="sh"><span class="sn mono">09 / AGENDA</span><h2 class="st">Próximos <span class="gold">Eventos</span></h2><div class="sl"></div></div>
+  <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:2rem">// JUNIO 2026 · SEÑAL ACTIVA</p>
+  <div style="display:flex;flex-direction:column;gap:.75rem">
+
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--lime);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--lime);line-height:1">12<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">VANTA ROOM</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">CAMPECHE · MX</div>
+      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--lime);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1">17<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">SALA SALA</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">MÉRIDA · MX &nbsp;·&nbsp; <span style="color:var(--gold)">VINYL SET</span></div>
+      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--cyan);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--cyan);line-height:1">26<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">LADY LEE ROOFTOP</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">GUADALAJARA · MX</div>
+      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--cyan);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid var(--muted);border-left:3px solid var(--gold);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:var(--gold);line-height:1">27<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUN</span></div>
+      <div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">TEMPO</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">QUERÉTARO · MX</div>
+      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:var(--gold);letter-spacing:.15em">CONFIRMED ◉</div>
+    </div>
+
+    <div style="background:var(--card);border:1px solid rgba(255,119,0,0.3);border-left:3px solid var(--orange,#ff7700);padding:1.25rem 1.5rem;display:grid;grid-template-columns:80px 1fr auto;align-items:center;gap:1.5rem;opacity:.75">
+      <div style="font-family:'Orbitron',sans-serif;font-size:1.6rem;font-weight:900;color:#ff7700;line-height:1">TBC<br><span style="font-size:.55rem;letter-spacing:.15em;color:var(--dim)">JUL</span></div>
+      <div>
+        <div style="font-family:'Orbitron',sans-serif;font-size:.85rem;font-weight:700;color:var(--white)">POR CONFIRMAR</div>
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem;letter-spacing:.1em">GUADALAJARA · MX</div>
+      </div>
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.6rem;color:#ff7700;letter-spacing:.15em">TBC ◌</div>
+    </div>
+
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- BOOKING CHATBOT -->
+<section id="agente" style="background:var(--panel)"><div class="sw">
+  <div class="sh"><span class="sn mono">10 / AGENTE</span><h2 class="st">Booking <span class="gold">Agent AI</span></h2><div class="sl"></div></div>
+  <p class="mono dim" style="font-size:.65rem;letter-spacing:.15em;margin-bottom:2rem;line-height:1.8">
+    // AGENTE INTELIGENTE · Genera pitches de booking personalizados para venues, festivales y promotores.<br>
+    // Responde en español o inglés · Instagram DMs · Emails formales · Follow-ups
+  </p>
+
+  <!-- Chat UI -->
+  <div style="background:var(--card);border:1px solid var(--muted);overflow:hidden;max-width:800px">
+    <!-- Chat header -->
+    <div style="background:var(--panel);border-bottom:1px solid var(--muted);padding:1rem 1.5rem;display:flex;align-items:center;gap:1rem">
+      <div style="width:8px;height:8px;border-radius:50%;background:var(--lime);box-shadow:0 0 8px var(--lime);animation:pdot 1.5s ease-in-out infinite"></div>
+      <span style="font-family:'Orbitron',sans-serif;font-size:.75rem;font-weight:700;color:var(--white);letter-spacing:.1em">CHAP BOOKING AGENT</span>
+      <span style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);margin-left:auto">AI POWERED · CLAUDE</span>
+    </div>
+
+    <!-- Messages -->
+    <div id="chat-messages" style="height:360px;overflow-y:auto;padding:1.5rem;display:flex;flex-direction:column;gap:1rem">
+      <div style="display:flex;gap:.75rem;align-items:flex-start">
+        <div style="width:28px;height:28px;border-radius:0;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:'Orbitron',sans-serif;font-size:.6rem;font-weight:700;color:#000;flex-shrink:0">AI</div>
+        <div style="background:var(--panel);border:1px solid var(--muted);padding:.75rem 1rem;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--text);line-height:1.6;max-width:85%">
+          Agente listo. Tengo el perfil completo de CHAP cargado.<br>
+          Dime el venue, ciudad y formato (DM de Instagram o email) y genero el pitch al instante.
+        </div>
+      </div>
+    </div>
+
+    <!-- Quick presets -->
+    <div style="border-top:1px solid var(--muted);padding:.75rem 1rem;display:flex;gap:.5rem;flex-wrap:wrap;background:var(--panel)">
+      <button onclick="loadAgentPreset('dm_es')" style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);background:none;border:1px solid var(--muted);padding:.3rem .7rem;cursor:pointer;letter-spacing:.08em;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--muted)';this.style.color='var(--dim)'">DM Instagram ES</button>
+      <button onclick="loadAgentPreset('dm_en')" style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);background:none;border:1px solid var(--muted);padding:.3rem .7rem;cursor:pointer;letter-spacing:.08em;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--muted)';this.style.color='var(--dim)'">DM Instagram EN</button>
+      <button onclick="loadAgentPreset('email_es')" style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);background:none;border:1px solid var(--muted);padding:.3rem .7rem;cursor:pointer;letter-spacing:.08em;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--muted)';this.style.color='var(--dim)'">Email Formal ES</button>
+      <button onclick="loadAgentPreset('followup')" style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);background:none;border:1px solid var(--muted);padding:.3rem .7rem;cursor:pointer;letter-spacing:.08em;transition:all .2s" onmouseover="this.style.borderColor='var(--gold)';this.style.color='var(--gold)'" onmouseout="this.style.borderColor='var(--muted)';this.style.color='var(--dim)'">Follow-up</button>
+      <button onclick="loadAgentPreset('summer')" style="font-family:'Share Tech Mono',monospace;font-size:.58rem;color:var(--dim);background:none;border:1px solid var(--muted);padding:.3rem .7rem;cursor:pointer;letter-spacing:.08em;transition:all .2s" onmouseover="this.style.borderColor='var(--cyan)';this.style.color='var(--cyan)'" onmouseout="this.style.borderColor='var(--muted)';this.style.color='var(--dim)'">Verano MX</button>
+    </div>
+
+    <!-- Input -->
+    <div style="border-top:1px solid var(--muted);padding:1rem;display:flex;gap:.75rem;align-items:flex-end">
+      <textarea id="agent-input" placeholder="Dime el venue, ciudad y formato..." rows="2" style="flex:1;background:var(--panel);border:1px solid var(--muted);color:var(--text);font-family:'Share Tech Mono',monospace;font-size:.72rem;padding:.75rem;resize:none;outline:none;line-height:1.5;transition:border-color .2s" onfocus="this.style.borderColor='var(--gold)'" onblur="this.style.borderColor='var(--muted)'" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendAgent()}"></textarea>
+      <button onclick="sendAgent()" style="font-family:'Orbitron',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.12em;color:#000;background:var(--gold);border:none;padding:.75rem 1.25rem;cursor:pointer;transition:opacity .2s;flex-shrink:0" onmouseover="this.style.opacity='.8'" onmouseout="this.style.opacity='1'">ENVIAR</button>
+    </div>
+  </div>
+</div></section>
+
+<script>
+const AGENT_SYSTEM = `You are a professional booking agent AI assistant for CHAP (Carlos Ochoa), a DJ and producer based in Mérida, Yucatán, Mexico.
+
+ARTIST PROFILE:
+- Name: CHAP (Carlos Ochoa)
+- Based: Mérida, Yucatán, Mexico
+- DJ Instagram: @djchap — https://www.instagram.com/djchap
+- Producer alias: Co8a — @co8amusic
+- Spotify (as Co8a): https://open.spotify.com/artist/7uvVmW54GdRghd7Pm9GVX6
+- Mixcloud: https://www.mixcloud.com/djchapmx/
+- SoundCloud: https://soundcloud.com/co8as
+- YouTube: https://youtube.com/@co8amusicofficial
+- Genre: Melodic House, Indie Dance, Progressive Melodic Techno
+- Setup: Digital + Vinyl
+- Career: 28+ years (since 1996, Festival Cervantino)
+- 2003: Arteria Records — Loveparade MX (Av. Reforma, 20,000 pax), Toltécnica Fest (Teotihuacán)
+- Current venues: Ancestro MX, Confessions (Cancún), Classico Peninsula, Ignoto, Casa Revo (Cd del Carmen), Azotea, Vanite, Vientooo
+- Upcoming: Vanta Room Campeche (Jun 12), Sala Sala Mérida vinyl set (Jun 17), Lady Lee Rooftop Guadalajara (Jun 26), Tempo Querétaro (Jun 27)
+- Shared stage: Lee Burridge, Pig & Dan, Iñigo Vontier, PillowTalk, Bostich, Sian, Oriol Calvo, Blondish, Nortec Colective, Chus & Ceballos, Boris, Pulsar, Sean Toja, Rodriguez Jr., Harry Romero and many more
+- Labels: Toltécnica Records, Euforia en la Red, Holographic Music, TechMex Music, Trauman Recordings, Array Records
+- Booking: djchap@gmail.com
+
+PITCH RULES:
+1. Instagram DMs: SHORT (max 5-6 lines), casual but confident, include hook
+2. Emails: structured with subject line, include 2-3 shared stage names
+3. Always include: Mixcloud + SoundCloud + YouTube + Spotify links
+4. Mention both handles: @djchap (DJ) and @co8amusic (producer)
+5. Mention vinyl + digital setup for boutique venues
+6. After pitch add 2-3 "VENUE TIPS" for that specific market
+7. Adapt tone: beach/boutique = casual; clubs/festivals = more formal
+8. Write in Spanish by default, English if requested
+9. No fluff — confident, direct, let credentials speak
+
+Always be concise and confident.`;
+
+const agentMessages = [
+  {role:'user', content: AGENT_SYSTEM + '\n\nYou are ready.'},
+  {role:'assistant', content: 'Agente listo. Tengo el perfil completo de CHAP cargado.\nDime el venue, ciudad y formato (DM de Instagram o email) y genero el pitch al instante.'}
+];
+
+const agentPresets = {
+  dm_es: 'Escríbeme un DM de Instagram en español para un venue underground en Oaxaca. Tipo bar/club bohemio.',
+  dm_en: 'Write me an Instagram DM in English for a boutique beach venue in Sayulita. Upscale international crowd.',
+  email_es: 'Escríbeme un email de booking formal en español para un club en Guadalajara. Incluye asunto.',
+  followup: 'Escríbeme un follow-up para un venue que no respondió en 2 semanas. Amigable pero crea urgencia. En español.',
+  summer: 'Dame 3 DMs rápidos para: 1) San Cristóbal de las Casas underground, 2) Querétaro club, 3) San Miguel de Allende rooftop boutique. Todos en español.'
+};
+
+function loadAgentPreset(key) {
+  document.getElementById('agent-input').value = agentPresets[key];
+}
+
+function addAgentMsg(role, text) {
+  const box = document.getElementById('chat-messages');
+  const wrap = document.createElement('div');
+  wrap.style.cssText = 'display:flex;gap:.75rem;align-items:flex-start;' + (role==='user'?'flex-direction:row-reverse':'');
+  const avatar = document.createElement('div');
+  avatar.style.cssText = 'width:28px;height:28px;border-radius:0;display:flex;align-items:center;justify-content:center;font-family:Orbitron,sans-serif;font-size:.6rem;font-weight:700;flex-shrink:0;' + (role==='user'?'background:var(--muted);color:var(--white)':'background:var(--gold);color:#000');
+  avatar.textContent = role==='user'?'CO':'AI';
+  const bubble = document.createElement('div');
+  bubble.style.cssText = 'border:1px solid var(--muted);padding:.75rem 1rem;font-family:Share Tech Mono,monospace;font-size:.72rem;line-height:1.6;max-width:85%;white-space:pre-wrap;' + (role==='user'?'background:rgba(200,168,75,.06);color:var(--text);border-color:rgba(200,168,75,.2)':'background:var(--panel);color:var(--text)');
+  bubble.textContent = text;
+  wrap.appendChild(avatar); wrap.appendChild(bubble);
+  box.appendChild(wrap);
+  box.scrollTop = box.scrollHeight;
+}
+
+async function sendAgent() {
+  const input = document.getElementById('agent-input');
+  const text = input.value.trim();
+  if(!text) return;
+  input.value = '';
+  addAgentMsg('user', text);
+  agentMessages.push({role:'user', content:text});
+
+  const thinkingWrap = document.createElement('div');
+  thinkingWrap.style.cssText = 'display:flex;gap:.75rem;align-items:flex-start';
+  thinkingWrap.innerHTML = '<div style="width:28px;height:28px;background:var(--gold);display:flex;align-items:center;justify-content:center;font-family:Orbitron,sans-serif;font-size:.6rem;font-weight:700;color:#000;flex-shrink:0">AI</div><div style="background:var(--panel);border:1px solid var(--muted);padding:.75rem 1rem;font-family:Share Tech Mono,monospace;font-size:.72rem;color:var(--dim)">Generando pitch...</div>';
+  document.getElementById('chat-messages').appendChild(thinkingWrap);
+  document.getElementById('chat-messages').scrollTop = 99999;
+
+  try {
+    const res = await fetch('https://api.anthropic.com/v1/messages', {
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514',
+        max_tokens:1000,
+        system: AGENT_SYSTEM,
+        messages: agentMessages.slice(2)
+      })
+    });
+    const data = await res.json();
+    const reply = data.content?.[0]?.text || 'Error al generar respuesta.';
+    thinkingWrap.remove();
+    agentMessages.push({role:'assistant', content:reply});
+    addAgentMsg('assistant', reply);
+  } catch(e) {
+    thinkingWrap.remove();
+    addAgentMsg('assistant', 'Error de conexión. Intenta de nuevo.');
+  }
+}
+</script>
   <div class="flogo">CHAP</div>
   <div class="fcopy">© 2026 CARLOS OCHOA aka CHAP / CO8A · ALL RIGHTS RESERVED</div>
   <div class="ftag">THE FUTURE IS NEAR ◈</div>
