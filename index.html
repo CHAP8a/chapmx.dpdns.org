@@ -181,6 +181,11 @@
   </style>
 </head>
 <body>
+<script>
+  // Force scroll to top on every page load — prevents browser restoring scroll position
+  if ('scrollRestoration' in history) { history.scrollRestoration = 'manual'; }
+  window.scrollTo(0, 0);
+</script>
 
 <nav>
   <div class="nav-logo">C<span>H</span>AP</div>
@@ -734,6 +739,10 @@
     <h2 class="btit">¿Listo para <span class="gold">despegar?</span></h2>
     <p class="bsub">DJ residente, sets privados, festivales y residencias en el sureste mexicano y más allá. Más de 28 años en las cabinas — la señal sigue activa.</p>
     <a href="mailto:djchap@gmail.com" class="btn btn-gold" style="font-size:.85rem;padding:1rem 3rem">INICIAR TRANSMISIÓN</a>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem">
+      <a href="CHAP_PRESSKIT_2024_ES.pdf" download class="btn" style="border-color:var(--gold);color:var(--gold);font-size:.65rem;padding:.65rem 1.5rem">⬇ PRESSKIT ES</a>
+      <a href="CHAP_PRESSKIT_2024_EN.pdf" download class="btn" style="border-color:var(--cyan);color:var(--cyan);font-size:.65rem;padding:.65rem 1.5rem">⬇ PRESSKIT EN</a>
+    </div>
     <div class="bcon">
       <div class="bc"><div class="bcl">// EMAIL</div><div class="bcv">djchap@gmail.com</div></div>
       <div class="bc"><div class="bcl">// INSTAGRAM</div><div class="bcv">@djchap</div></div>
