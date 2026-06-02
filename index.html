@@ -28,7 +28,45 @@
     #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;overflow:hidden;background:#080a0b}
     #hero-canvas{position:absolute;inset:0;width:100%;height:100%;z-index:0}
     .hero-overlay{position:absolute;inset:0;background:radial-gradient(ellipse 70% 70% at 50% 50%,transparent 20%,rgba(8,10,11,.65) 100%);z-index:1;pointer-events:none}
-    .hero-badge{display:inline-block;font-family:"Share Tech Mono",monospace;font-size:.62rem;letter-spacing:.3em;color:var(--gold);border:1px solid var(--gold);padding:.3rem 1.2rem;margin-bottom:2rem;animation:gbadge 3s ease-in-out infinite;position:relative;z-index:2}
+    /* CHAP holographic photo */
+    .hero-photo{
+      position:absolute;
+      right:0; bottom:0;
+      width:55%; max-width:680px;
+      height:100%;
+      z-index:1;
+      pointer-events:none;
+      display:flex; align-items:flex-end; justify-content:flex-end;
+    }
+    .hero-photo img{
+      width:100%; height:100%;
+      object-fit:contain; object-position:bottom right;
+      opacity:0;
+      mix-blend-mode:screen;
+      filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1);
+      animation:photo-in 2s ease-out 0.5s forwards, photo-glitch 9s infinite 3s;
+      -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 40%, transparent 100%);
+      mask-image: linear-gradient(to left, rgba(0,0,0,0.85) 40%, transparent 100%);
+    }
+    @keyframes photo-in{
+      0%{opacity:0;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.1) contrast(2);transform:translateX(20px)}
+      30%{opacity:.15;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.7) contrast(1.5)}
+      60%{opacity:.22}
+      100%{opacity:.28;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1);transform:translateX(0)}
+    }
+    @keyframes photo-glitch{
+      0%,85%,100%{
+        opacity:.28;
+        clip-path:inset(0 0 0 0);
+        transform:translate(0,0);
+        filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1);
+      }
+      86%{clip-path:inset(8% 0 60% 0);transform:translate(-4px,0);filter:sepia(1) hue-rotate(180deg) saturate(2) brightness(0.8) contrast(2);opacity:.5}
+      87%{clip-path:inset(40% 0 20% 0);transform:translate(4px,0);filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55);opacity:.3}
+      88%{clip-path:inset(20% 0 50% 0);transform:translate(-2px,2px);filter:sepia(1) hue-rotate(90deg) saturate(1.5) brightness(1) contrast(2);opacity:.45}
+      89%{clip-path:inset(0 0 0 0);transform:translate(0,0);opacity:.15}
+      90%{clip-path:inset(0 0 0 0);transform:translate(0,0);opacity:.28;filter:sepia(1) hue-rotate(5deg) saturate(0.4) brightness(0.55) contrast(1.1)}
+    }
     @keyframes gbadge{0%,100%{box-shadow:0 0 8px rgba(200,168,75,.3)}50%{box-shadow:0 0 28px rgba(200,168,75,.65)}}
     .hero-name{font-family:"Orbitron",sans-serif;font-size:clamp(5rem,18vw,14rem);font-weight:900;line-height:.85;letter-spacing:.12em;color:var(--white);text-shadow:0 0 80px rgba(200,168,75,.18),0 0 160px rgba(200,168,75,.08);position:relative;z-index:2;margin-bottom:.5rem;animation:glitch 7s infinite}
     @keyframes glitch{
@@ -165,6 +203,9 @@
 <header id="hero">
   <canvas id="hero-canvas"></canvas>
   <div class="hero-overlay"></div>
+  <div class="hero-photo">
+    <img src="chap-photo.png" alt="CHAP" />
+  </div>
   <div class="hero-badge">◈ DJ · PRODUCER · MÉX · EST. 1996 ◈</div>
   <h1 class="hero-name">CHAP</h1>
   <p class="hero-aka">A K A &nbsp; C O 8 A &nbsp; / &nbsp; C A R L O S &nbsp; O C H O A</p>
