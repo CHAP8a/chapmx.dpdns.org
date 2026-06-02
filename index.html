@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CHAP — DJ · Producer · Mérida, Yuc.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Rajdhani:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:#080a0b; --panel:#0d1114; --card:#111619;
+      --gold:#c8a84b; --lime:#b8ff00; --cyan:#00e5ff; --red:#ff3030;
+      --muted:#2a3540; --dim:#4a6070; --text:#c4d8e0; --white:#eef5f8;
+    }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth}
+    body{background:var(--bg);color:var(--text);font-family:"Rajdhani",sans-serif;font-weight:400;overflow-x:hidden;cursor:crosshair}
+    body::before{content:"";position:fixed;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.07) 2px,rgba(0,0,0,.07) 4px);pointer-events:none;z-index:9999}
+    .mono{font-family:"Share Tech Mono",monospace}
+    .gold{color:var(--gold)} .lime{color:var(--lime)} .cyan{color:var(--cyan)} .dim{color:var(--dim)}
+
+    nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(8,10,11,.96);border-bottom:1px solid var(--muted);display:flex;justify-content:space-between;align-items:center;padding:.8rem 3rem;backdrop-filter:blur(10px)}
+    .nav-logo{font-family:"Orbitron",sans-serif;font-size:1.1rem;font-weight:900;letter-spacing:.3em;color:var(--white)}
+    .nav-logo span{color:var(--gold);text-shadow:0 0 14px var(--gold)}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{font-family:"Share Tech Mono",monospace;font-size:.66rem;letter-spacing:.16em;color:var(--dim);text-decoration:none;text-transform:uppercase;transition:color .2s}
+    .nav-links a:hover{color:var(--gold)}
+
+    #hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:6rem 2rem 4rem;position:relative;background:radial-gradient(ellipse 70% 60% at 50% 55%,rgba(200,168,75,.06) 0%,transparent 65%),radial-gradient(ellipse 40% 30% at 80% 20%,rgba(0,229,255,.03) 0%,transparent 60%)}
+    .hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(200,168,75,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(200,168,75,.04) 1px,transparent 1px);background-size:70px 70px;mask-image:radial-gradient(ellipse 90% 90% at 50% 50%,black 20%,transparent 100%)}
+    .radar-ring{position:absolute;width:600px;height:600px;border-radius:50%;border:1px solid rgba(200,168,75,.07);top:50%;left:50%;transform:translate(-50%,-50%);animation:spin-slow 40s linear infinite}
+    .radar-ring::before{content:"";position:absolute;inset:50px;border-radius:50%;border:1px solid rgba(0,229,255,.05)}
+    .radar-ring::after{content:"";position:absolute;inset:110px;border-radius:50%;border:1px dashed rgba(200,168,75,.04)}
+    @keyframes spin-slow{to{transform:translate(-50%,-50%) rotate(360deg)}}
+    .hero-badge{display:inline-block;font-family:"Share Tech Mono",monospace;font-size:.62rem;letter-spacing:.3em;color:var(--gold);border:1px solid var(--gold);padding:.3rem 1.2rem;margin-bottom:2rem;animation:gbadge 3s ease-in-out infinite;position:relative;z-index:1}
+    @keyframes gbadge{0%,100%{box-shadow:0 0 8px rgba(200,168,75,.3)}50%{box-shadow:0 0 28px rgba(200,168,75,.65)}}
+    .hero-name{font-family:"Orbitron",sans-serif;font-size:clamp(5rem,18vw,14rem);font-weight:900;line-height:.85;letter-spacing:.12em;color:var(--white);text-shadow:0 0 80px rgba(200,168,75,.18),0 0 160px rgba(200,168,75,.08);position:relative;z-index:1;margin-bottom:.5rem}
+    .hero-aka{font-family:"Share Tech Mono",monospace;font-size:clamp(.7rem,1.4vw,.95rem);letter-spacing:.4em;color:var(--gold);margin-bottom:.5rem;position:relative;z-index:1}
+    .hero-loc{font-family:"Share Tech Mono",monospace;font-size:.7rem;letter-spacing:.22em;color:var(--dim);margin-bottom:3rem;position:relative;z-index:1}
+    .hero-loc span{color:var(--cyan)}
+    .hero-tag{font-family:"Orbitron",sans-serif;font-size:clamp(.9rem,2vw,1.4rem);font-weight:400;letter-spacing:.25em;color:var(--text);margin-bottom:3.5rem;position:relative;z-index:1}
+    .hero-cta{display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;position:relative;z-index:1}
+
+    .btn{font-family:"Orbitron",sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.18em;text-decoration:none;padding:.9rem 2.2rem;border:2px solid;text-transform:uppercase;transition:all .25s;cursor:pointer;display:inline-block}
+    .btn-gold{background:var(--gold);color:#000;border-color:var(--gold);box-shadow:0 0 24px rgba(200,168,75,.35)}
+    .btn-gold:hover{background:transparent;color:var(--gold)}
+    .btn-ghost{background:transparent;color:var(--cyan);border-color:var(--cyan)}
+    .btn-ghost:hover{background:rgba(0,229,255,.08);box-shadow:0 0 20px rgba(0,229,255,.25)}
+
+    .ticker-wrap{overflow:hidden;background:var(--gold);padding:.45rem 0;white-space:nowrap}
+    .ticker{display:inline-block;animation:ticker 30s linear infinite;font-family:"Share Tech Mono",monospace;font-size:.68rem;letter-spacing:.18em;color:#000}
+    @keyframes ticker{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+    .sw{max-width:1200px;margin:0 auto;padding:6rem 2rem}
+    .sh{display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem}
+    .sn{font-family:"Share Tech Mono",monospace;font-size:.65rem;color:var(--gold);letter-spacing:.2em;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap}
+    .st{font-family:"Orbitron",sans-serif;font-size:clamp(1.6rem,4vw,2.8rem);font-weight:900;letter-spacing:.05em;color:var(--white);line-height:1}
+    .sl{flex:1;height:1px;background:linear-gradient(to right,var(--muted),transparent)}
+    .div{width:100%;height:1px;background:linear-gradient(to right,transparent,var(--muted),transparent)}
+
+    .bg{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+    .bt{font-size:1.1rem;font-weight:300;line-height:1.85;color:var(--text)}
+    .bt strong{color:var(--gold);font-weight:600}
+    .bt p+p{margin-top:1.2rem}
+    .bp{background:var(--card);border:1px solid var(--muted);padding:2rem}
+    .bpl{font-family:"Share Tech Mono",monospace;font-size:.6rem;letter-spacing:.2em;color:var(--gold);margin-bottom:1.5rem}
+    .bs{margin-bottom:1.5rem}
+    .bsl{font-family:"Share Tech Mono",monospace;font-size:.6rem;color:var(--dim);letter-spacing:.18em;margin-bottom:.3rem}
+    .bsv{font-family:"Orbitron",sans-serif;font-size:1.8rem;font-weight:900;line-height:1}
+    .bar{height:2px;background:var(--muted);margin-top:.4rem;overflow:hidden}
+    .bf{height:100%;animation:grow 2s ease-out forwards}
+    @keyframes grow{from{width:0}}
+
+    .cb{background:var(--card);border:1px solid rgba(200,168,75,.3);padding:1.5rem 2rem;display:flex;align-items:center;gap:1.5rem;margin-bottom:3rem}
+    .cd{width:10px;height:10px;border-radius:50%;background:var(--lime);box-shadow:0 0 12px var(--lime);flex-shrink:0;animation:pdot 1.5s ease-in-out infinite}
+    @keyframes pdot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.7)}}
+    .cl{font-family:"Share Tech Mono",monospace;font-size:.6rem;color:var(--dim);letter-spacing:.2em}
+    .cv{font-family:"Orbitron",sans-serif;font-size:.85rem;font-weight:700;color:var(--white)}
+
+    .tl{display:flex;flex-direction:column}
+    .tli{display:grid;grid-template-columns:80px 24px 1fr;gap:0 1.5rem;padding-bottom:2rem}
+    .tly{font-family:"Orbitron",sans-serif;font-size:.75rem;font-weight:700;color:var(--gold);text-align:right;padding-top:.1rem}
+    .tls{display:flex;flex-direction:column;align-items:center}
+    .tld{width:10px;height:10px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);flex-shrink:0}
+    .tlln{flex:1;width:1px;background:var(--muted);margin-top:4px}
+    .tlt{font-family:"Orbitron",sans-serif;font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.3rem;letter-spacing:.06em}
+    .tldc{font-size:.9rem;color:var(--dim);line-height:1.5;font-weight:300}
+
+    .lg{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+    .lc{background:var(--card);border:1px solid var(--muted);padding:1.5rem;display:flex;align-items:center;gap:1rem;clip-path:polygon(0 0,calc(100% - 14px) 0,100% 14px,100% 100%,14px 100%,0 calc(100% - 14px));transition:border-color .25s}
+    .lc:hover{border-color:var(--gold)}
+    .ln{font-family:"Orbitron",sans-serif;font-size:1.4rem;font-weight:900;color:var(--muted);flex-shrink:0}
+    .lname{font-family:"Orbitron",sans-serif;font-size:.78rem;font-weight:700;color:var(--white);letter-spacing:.08em}
+    .lorg{font-family:"Share Tech Mono",monospace;font-size:.58rem;color:var(--dim);margin-top:.2rem}
+
+    .fg{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem}
+    .fc{background:var(--card);border:1px solid var(--muted);padding:1.5rem;border-left:3px solid var(--gold);transition:background .2s}
+    .fc:hover{background:rgba(200,168,75,.04)}
+    .fn{font-family:"Orbitron",sans-serif;font-size:.82rem;font-weight:700;color:var(--white);margin-bottom:.3rem}
+    .floc{font-family:"Share Tech Mono",monospace;font-size:.62rem;color:var(--dim);letter-spacing:.15em}
+
+    .cg{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:.75rem}
+    .ci{background:var(--card);border:1px solid var(--muted);padding:1.1rem 1.4rem;transition:border-color .2s}
+    .ci:hover{border-color:var(--cyan)}
+    .cname{font-family:"Orbitron",sans-serif;font-size:.75rem;font-weight:700;color:var(--white)}
+    .ccity{font-family:"Share Tech Mono",monospace;font-size:.6rem;color:var(--dim);letter-spacing:.12em;margin-top:.2rem}
+
+    .nw{columns:3;column-gap:2rem;background:var(--card);border:1px solid var(--muted);padding:2rem}
+    .ni{font-family:"Share Tech Mono",monospace;font-size:.72rem;color:var(--dim);letter-spacing:.1em;padding:.4rem 0;border-bottom:1px solid rgba(42,53,64,.5);break-inside:avoid;transition:color .2s}
+    .ni:hover{color:var(--gold)}
+    .ni span{color:var(--text)}
+    .ni small{color:var(--dim);font-size:.58rem}
+
+    .sg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+    .sc{background:var(--card);border:1px solid var(--muted);padding:1.5rem;display:flex;align-items:center;gap:1rem;text-decoration:none;transition:all .2s}
+    .sc:hover{border-color:var(--gold);transform:translateX(4px)}
+    .si{font-size:1.6rem;flex-shrink:0}
+    .sname{font-family:"Orbitron",sans-serif;font-size:.75rem;font-weight:700;color:var(--white)}
+    .shandle{font-family:"Share Tech Mono",monospace;font-size:.62rem;color:var(--dim);margin-top:.2rem}
+
+    .tklist{display:flex;flex-direction:column;gap:.75rem}
+    .tki{background:var(--card);border:1px solid var(--muted);padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1.25rem;text-decoration:none;transition:border-color .2s}
+    .tki:hover{border-color:var(--gold)}
+    .tkp{font-family:"Orbitron",sans-serif;font-size:1.2rem;color:var(--gold);flex-shrink:0}
+    .tktit{font-family:"Orbitron",sans-serif;font-size:.78rem;font-weight:700;color:var(--white)}
+    .tkm{font-family:"Share Tech Mono",monospace;font-size:.6rem;color:var(--dim);margin-top:.2rem}
+
+    #booking{background:linear-gradient(135deg,rgba(200,168,75,.05) 0%,transparent 50%);border-top:1px solid rgba(200,168,75,.2);text-align:center}
+    .bi{max-width:700px;margin:0 auto}
+    .btit{font-family:"Orbitron",sans-serif;font-size:clamp(2rem,5vw,3.5rem);font-weight:900;color:var(--white);margin-bottom:.75rem}
+    .bsub{font-size:1.05rem;color:var(--dim);font-weight:300;margin-bottom:2.5rem;line-height:1.7}
+    .bcon{display:flex;gap:2.5rem;justify-content:center;flex-wrap:wrap;margin-top:2.5rem}
+    .bc{display:flex;flex-direction:column;gap:.3rem;align-items:center}
+    .bcl{font-family:"Share Tech Mono",monospace;font-size:.6rem;color:var(--dim);letter-spacing:.2em}
+    .bcv{font-family:"Orbitron",sans-serif;font-size:.9rem;font-weight:700;color:var(--gold);text-shadow:0 0 10px rgba(200,168,75,.3)}
+
+    footer{border-top:1px solid var(--muted);background:var(--panel);padding:2rem 3rem;display:flex;justify-content:space-between;align-items:center}
+    .flogo{font-family:"Orbitron",sans-serif;font-size:.9rem;font-weight:900;letter-spacing:.2em;color:var(--gold)}
+    .fcopy{font-family:"Share Tech Mono",monospace;font-size:.58rem;color:var(--muted);letter-spacing:.08em}
+    .ftag{font-family:"Share Tech Mono",monospace;font-size:.58rem;color:var(--dim);letter-spacing:.1em}
+
+    @media(max-width:900px){.bg{grid-template-columns:1fr}.nw{columns:2}}
+    @media(max-width:600px){nav{padding:.75rem 1.25rem}.nav-links{gap:.8rem}.nav-links a{font-size:.56rem}.sw{padding:4rem 1.25rem}.nw{columns:1}footer{flex-direction:column;gap:1rem;text-align:center}}
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">C<span>H</span>AP</div>
+  <ul class="nav-links">
+    <li><a href="#bio">Orígenes</a></li>
+    <li><a href="#labels">Disqueras</a></li>
+    <li><a href="#festivales">Festivales</a></li>
+    <li><a href="#escena">Escena</a></li>
+    <li><a href="#transmisiones">Señal</a></li>
+    <li><a href="#booking">Booking</a></li>
+  </ul>
+</nav>
+
+<header id="hero">
+  <div class="hero-grid"></div>
+  <div class="radar-ring"></div>
+  <div class="hero-badge">◈ DJ · PRODUCER · MÉX · EST. 1996 ◈</div>
+  <h1 class="hero-name">CHAP</h1>
+  <p class="hero-aka">A K A &nbsp; C O 8 A &nbsp; / &nbsp; C A R L O S &nbsp; O C H O A</p>
+  <p class="hero-loc mono">BASE DE OPERACIONES: <span>MID, YUC.</span></p>
+  <p class="hero-tag">T H E &nbsp; F U T U R E &nbsp; I S &nbsp; N E A R</p>
+  <div class="hero-cta">
+    <a href="#booking" class="btn btn-gold">Booking</a>
+    <a href="#transmisiones" class="btn btn-ghost">Escuchar</a>
+  </div>
+</header>
+
+<div class="ticker-wrap">
+  <span class="ticker">◈ TECHNO &nbsp;&nbsp; ◈ HOUSE &nbsp;&nbsp; ◈ HOLOGRAPHIC MUSIC &nbsp;&nbsp; ◈ TOLTECNICA RECORDS &nbsp;&nbsp; ◈ LOVEPARADE MX 2004 &nbsp;&nbsp; ◈ JEFE DE CABINA &nbsp;&nbsp; ◈ TRAUMAN RECORDINGS &nbsp;&nbsp; ◈ ARRAY RECORDS &nbsp;&nbsp; ◈ EUFORIA EN LA RED &nbsp;&nbsp; ◈ TECHMEX MUSIC &nbsp;&nbsp; ◈ MÉRIDA · YUCATÁN &nbsp;&nbsp; ◈ THE FUTURE IS NEAR &nbsp;&nbsp; ◈ TECHNO &nbsp;&nbsp; ◈ HOUSE &nbsp;&nbsp; ◈ HOLOGRAPHIC MUSIC &nbsp;&nbsp; ◈ TOLTECNICA RECORDS &nbsp;&nbsp; ◈ LOVEPARADE MX 2004 &nbsp;&nbsp; ◈ JEFE DE CABINA &nbsp;&nbsp; ◈ TRAUMAN RECORDINGS &nbsp;&nbsp; ◈ ARRAY RECORDS &nbsp;&nbsp; ◈ EUFORIA EN LA RED &nbsp;&nbsp; ◈ TECHMEX MUSIC &nbsp;&nbsp; ◈ MÉRIDA · YUCATÁN &nbsp;&nbsp; ◈ THE FUTURE IS NEAR &nbsp;&nbsp;</span>
+</div>
+
+<!-- 01 ORÍGENES -->
+<section id="bio"><div class="sw">
+  <div class="sh"><span class="sn mono">01 / ORÍGENES</span><h2 class="st">Carlos <span class="gold">Ochoa</span></h2><div class="sl"></div></div>
+  <div class="cb">
+    <div class="cd"></div>
+    <div>
+      <div class="cl">// ACTUALMENTE · JEFE DE CABINA</div>
+      <div class="cv">G.O.A.T. &nbsp;·&nbsp; Lyon &nbsp;·&nbsp; La Recova &nbsp;·&nbsp; Noosfera Club &nbsp;·&nbsp; Cielo Lounge &nbsp;·&nbsp; Club Condesa</div>
+    </div>
+  </div>
+  <div class="bg">
+    <div class="bt">
+      <p><strong>Carlos Ochoa</strong>, conocido en las cabinas como <strong>CHAP</strong> y en los sellos como <strong>Co8a</strong>, es DJ y productor electrónico con raíces en <strong>México D.F.</strong> y base actual en <strong>Mérida, Yucatán.</strong></p>
+      <p>Comenzó como DJ de apoyo en el <strong>Festival Cervantino del '96</strong>, tocando en clubes icónicos como La Casa del Gobernador. Su pasión por los <strong>vinilos en el '98</strong> — house y techno — lo llevó a los principales clubes de la Ciudad de México.</p>
+      <p>Logró posicionarse en la <strong>escena electrónica nacional</strong> y en el ranking de los mejores DJs del país. En <strong>2003</strong> firmó su primer contrato de representación con <strong>Arteria Records</strong>, productora del Loveparade (Av. Reforma, 20,000 pax) y Toltécnica en Teotihuacán.</p>
+    </div>
+    <div class="bp">
+      <div class="bpl">// COORDENADAS DEL SISTEMA</div>
+      <div class="bs"><div class="bsl">// AÑOS EN ACTIVO</div><div class="bsv gold">+28</div><div class="bar"><div class="bf" style="width:95%;background:var(--gold)"></div></div></div>
+      <div class="bs"><div class="bsl">// PRIMER SET PROFESIONAL</div><div class="bsv cyan" style="font-size:1.4rem">1996</div><div class="bar"><div class="bf" style="width:100%;background:var(--cyan)"></div></div></div>
+      <div class="bs"><div class="bsl">// GÉNERO</div><div class="bsv" style="color:var(--white);font-size:1.1rem;font-family:Rajdhani,sans-serif;font-weight:700">TECHNO · HOUSE</div><div class="bar"><div class="bf" style="width:90%;background:var(--lime)"></div></div></div>
+      <div class="bs"><div class="bsl">// BASE ACTUAL</div><div class="bsv" style="color:var(--white);font-size:1rem;font-family:Rajdhani,sans-serif;font-weight:700">MÉRIDA · YUCATÁN</div></div>
+    </div>
+  </div>
+  <div style="margin-top:4rem">
+    <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:2rem">// LÍNEA DE TIEMPO</p>
+    <div class="tl">
+      <div class="tli"><div class="tly">1996</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">FESTIVAL CERVANTINO</div><div class="tldc">Primer set como DJ de apoyo. Clubs como La Casa del Gobernador. Arranque de la trayectoria electrónica.</div></div></div>
+      <div class="tli"><div class="tly">1998</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">VINILO · HOUSE &amp; TECHNO</div><div class="tldc">Pasión por los vinilos lo lleva a los principales clubes de CDMX. Posicionamiento en el ranking nacional de DJs.</div></div></div>
+      <div class="tli"><div class="tly">2003</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">ARTERIA RECORDS</div><div class="tldc">Primer contrato de representación. Productora del Loveparade (Av. Reforma, 20,000 pax) y Toltécnica en Teotihuacán.</div></div></div>
+      <div class="tli"><div class="tly">2004</div><div class="tls"><div class="tld"></div><div class="tlln"></div></div><div><div class="tlt">LOVEPARADE MX 2004</div><div class="tldc">Av. Paseo de la Reforma, CDMX. Uno de los eventos electrónicos más icónicos de la historia de México.</div></div></div>
+      <div class="tli"><div class="tly">HOY</div><div class="tls"><div class="tld" style="background:var(--lime);box-shadow:0 0 14px var(--lime)"></div></div><div><div class="tlt" style="color:var(--lime)">JEFE DE CABINA · MÉRIDA</div><div class="tldc">Residente en los principales venues del sureste mexicano. Producción activa en sellos nacionales e internacionales.</div></div></div>
+    </div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- 02 DISQUERAS -->
+<section id="labels" style="background:var(--panel)"><div class="sw">
+  <div class="sh"><span class="sn mono">02 / DISQUERAS</span><h2 class="st">Record <span class="gold">Labels</span></h2><div class="sl"></div></div>
+  <div class="lg">
+    <div class="lc"><div class="ln">01</div><div><div class="lname">TOLTECNICA RECORDS</div><div class="lorg">MX</div></div></div>
+    <div class="lc"><div class="ln">02</div><div><div class="lname">EUFORIA EN LA RED</div><div class="lorg">MX</div></div></div>
+    <div class="lc"><div class="ln">03</div><div><div class="lname">HOLOGRAPHIC MUSIC</div><div class="lorg">MX / INTL</div></div></div>
+    <div class="lc"><div class="ln">04</div><div><div class="lname">TECHMEX MUSIC</div><div class="lorg">MX</div></div></div>
+    <div class="lc"><div class="ln">05</div><div><div class="lname">TRAUMAN RECORDINGS</div><div class="lorg">INTL</div></div></div>
+    <div class="lc"><div class="ln">06</div><div><div class="lname">ARRAY RECORDS</div><div class="lorg">INTL</div></div></div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- 03 FESTIVALES -->
+<section id="festivales"><div class="sw">
+  <div class="sh"><span class="sn mono">03 / FESTIVALES</span><h2 class="st">Eventos <span class="gold">Destacados</span></h2><div class="sl"></div></div>
+  <div class="fg">
+    <div class="fc" style="border-left-width:4px"><div class="fn">LOVEPARADE MX 2004</div><div class="floc">AV. PASEO DE LA REFORMA · CDMX · 20,000 PAX</div></div>
+    <div class="fc"><div class="fn">TOLTECHNICA FEST</div><div class="floc">TEOTIHUACÁN · MX</div></div>
+    <div class="fc"><div class="fn">INTERNATIONAL BOARD CONTEST</div><div class="floc">OAXACA · MX</div></div>
+    <div class="fc"><div class="fn">ELECTRIC BEACH</div><div class="floc">MÉXICO</div></div>
+    <div class="fc"><div class="fn">EXTREME REDBULL</div><div class="floc">PUERTO ESCONDIDO · OAXACA</div></div>
+    <div class="fc"><div class="fn">FIESTA BRAVA</div><div class="floc">CARNIVAL ROYAL · PLAYA DEL CARMEN</div></div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- 04 CLUBES -->
+<section id="clubs" style="background:var(--panel)"><div class="sw">
+  <div class="sh"><span class="sn mono">04 / CLUBES</span><h2 class="st">Venues <span class="cyan">Nacionales</span></h2><div class="sl"></div></div>
+  <div class="cg">
+    <div class="ci"><div class="cname">20DOCE / AZOTEA</div><div class="ccity">MÉRIDA, YUCATÁN</div></div>
+    <div class="ci"><div class="cname">REINA ROJA HOTEL</div><div class="ccity">PLAYA DEL CARMEN</div></div>
+    <div class="ci"><div class="cname">ME CANCUN</div><div class="ccity">CANCÚN, QROO</div></div>
+    <div class="ci"><div class="cname">AURA TULUM</div><div class="ccity">TULUM, QROO</div></div>
+    <div class="ci"><div class="cname">DE SANTOS</div><div class="ccity">PUERTO VALLARTA</div></div>
+    <div class="ci"><div class="cname">EL PUNTO</div><div class="ccity">PUERTO ESCONDIDO, OAXACA</div></div>
+    <div class="ci"><div class="cname">1.5 SUSHI</div><div class="ccity">ISLA COZUMEL, QROO</div></div>
+    <div class="ci"><div class="cname">NIKKI BEACH CABO</div><div class="ccity">CABO SAN LUCAS</div></div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- 05 ESCENA -->
+<section id="escena"><div class="sw">
+  <div class="sh"><span class="sn mono">05 / ESCENA</span><h2 class="st">Compartido <span class="gold">Escenario</span></h2><div class="sl"></div></div>
+  <p class="mono dim" style="font-size:.62rem;letter-spacing:.2em;margin-bottom:1.5rem">// ARTISTAS CON QUIENES HA COMPARTIDO CABINA</p>
+  <div class="nw">
+    <div class="ni"><span>Iñigo Vontier</span></div>
+    <div class="ni"><span>Pig &amp; Dan</span> <small>(SPN)</small></div>
+    <div class="ni"><span>Lee Burridge</span> <small>(UK)</small></div>
+    <div class="ni"><span>Tobiaz Luzerkitchen</span></div>
+    <div class="ni"><span>Pillowtalk</span> <small>(US)</small></div>
+    <div class="ni"><span>Ramon Amezcua (Bostich)</span></div>
+    <div class="ni"><span>Jerome Robins</span> <small>(US)</small></div>
+    <div class="ni"><span>The Cube Guys</span> <small>(US)</small></div>
+    <div class="ni"><span>Harry Romero</span></div>
+    <div class="ni"><span>Oriol Calvo</span> <small>(ESP)</small></div>
+    <div class="ni"><span>Mar-C (Santanera)</span></div>
+    <div class="ni"><span>Sian</span> <small>(UK)</small></div>
+    <div class="ni"><span>Armand Pena</span></div>
+    <div class="ni"><span>Ademarr</span></div>
+    <div class="ni"><span>Itzone</span></div>
+    <div class="ni"><span>Foty Cats</span> <small>(RUS)</small></div>
+    <div class="ni"><span>Manufactured Superstars</span></div>
+    <div class="ni"><span>Klang</span> <small>(Loveparade Mayday)</small></div>
+    <div class="ni"><span>Mauricio Alonzo</span> <small>(3B SOS Rec)</small></div>
+    <div class="ni"><span>Cedric Guerbais</span></div>
+    <div class="ni"><span>Blondish</span> <small>(UK)</small></div>
+    <div class="ni"><span>Nortec Colective</span></div>
+    <div class="ni"><span>Chus &amp; Ceballos</span> <small>(SPN)</small></div>
+    <div class="ni"><span>Carlos Alfonsín</span> <small>(ARG)</small></div>
+    <div class="ni"><span>Boris</span> <small>(US)</small></div>
+    <div class="ni"><span>Dezarate</span></div>
+    <div class="ni"><span>Metrika</span></div>
+    <div class="ni"><span>Belanova</span></div>
+    <div class="ni"><span>Sussie 4</span></div>
+    <div class="ni"><span>Climbers</span></div>
+    <div class="ni"><span>Jungle Vibes</span></div>
+    <div class="ni"><span>Rodriguez Jr.</span> <small>(FRN)</small></div>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- 06 TRANSMISIONES -->
+<section id="transmisiones" style="background:var(--panel)"><div class="sw">
+  <div class="sh"><span class="sn mono">06 / SEÑAL</span><h2 class="st">Trans<span class="gold">misiones</span></h2><div class="sl"></div></div>
+  <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:1.2rem">// ÚLTIMAS EMISIONES</p>
+  <div class="tklist" style="margin-bottom:3rem">
+    <a href="https://soundcloud.com/co8as/chap-mx-ancestro-mid-yuc_2026" target="_blank" class="tki"><div class="tkp">▶</div><div><div class="tktit">CHAP MX ANCESTRO — MID YUC_2026</div><div class="tkm">SOUNDCLOUD · MARZO 2026</div></div></a>
+    <a href="https://soundcloud.com/co8as/chapcast-sci-fi-music-for-hi-fi-audio" target="_blank" class="tki"><div class="tkp" style="color:var(--cyan)">▶</div><div><div class="tktit">CHAPCAST — SCI-FI MUSIC IN MY BAG (HI-FI)</div><div class="tkm">SOUNDCLOUD · JULIO 2024</div></div></a>
+    <a href="https://soundcloud.com/co8as" target="_blank" class="tki"><div class="tkp" style="color:var(--lime)">▶</div><div><div class="tktit">SPACE BETWEEN</div><div class="tkm">SOUNDCLOUD · CHAP / CO8A</div></div></a>
+  </div>
+  <p class="mono dim" style="font-size:.62rem;letter-spacing:.22em;margin-bottom:1.2rem">// CANALES</p>
+  <div class="sg">
+    <a href="https://www.instagram.com/djchap" target="_blank" class="sc"><span class="si">📸</span><div><div class="sname">INSTAGRAM</div><div class="shandle">@djchap</div></div></a>
+    <a href="https://www.instagram.com/co8amusic" target="_blank" class="sc"><span class="si">🎛</span><div><div class="sname">INSTAGRAM · CO8A</div><div class="shandle">@co8amusic</div></div></a>
+    <a href="https://www.mixcloud.com/djchapmx/" target="_blank" class="sc"><span class="si">📻</span><div><div class="sname">MIXCLOUD</div><div class="shandle">CHAP MX — Radio Shows &amp; Mixes</div></div></a>
+    <a href="https://soundcloud.com/co8as" target="_blank" class="sc"><span class="si">🔊</span><div><div class="sname">SOUNDCLOUD</div><div class="shandle">CHAP / Co8a</div></div></a>
+    <a href="https://linktr.ee/co8amusic" target="_blank" class="sc"><span class="si">🔗</span><div><div class="sname">LINKTREE</div><div class="shandle">linktr.ee/co8amusic</div></div></a>
+  </div>
+</div></section>
+
+<div class="div"></div>
+
+<!-- 07 BOOKING -->
+<section id="booking"><div class="sw" style="text-align:center">
+  <div class="bi">
+    <div class="hero-badge" style="margin-bottom:1.5rem">◈ DISPONIBLE PARA BOOKINGS ◈</div>
+    <h2 class="btit">¿Listo para <span class="gold">despegar?</span></h2>
+    <p class="bsub">DJ residente, sets privados, festivales y residencias en el sureste mexicano y más allá. Más de 28 años en las cabinas — la señal sigue activa.</p>
+    <a href="mailto:djchap@gmail.com" class="btn btn-gold" style="font-size:.85rem;padding:1rem 3rem">INICIAR TRANSMISIÓN</a>
+    <div class="bcon">
+      <div class="bc"><div class="bcl">// EMAIL</div><div class="bcv">djchap@gmail.com</div></div>
+      <div class="bc"><div class="bcl">// INSTAGRAM</div><div class="bcv">@djchap</div></div>
+      <div class="bc"><div class="bcl">// BASE</div><div class="bcv">MÉR IDA · YUC.</div></div>
+    </div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="flogo">CHAP</div>
+  <div class="fcopy">© 2026 CARLOS OCHOA aka CHAP / CO8A · ALL RIGHTS RESERVED</div>
+  <div class="ftag">THE FUTURE IS NEAR ◈</div>
+</footer>
+
+</body>
+</html>
