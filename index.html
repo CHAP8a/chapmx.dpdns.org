@@ -1041,39 +1041,47 @@ function unlockAgent(){
   }
 }
 
-const AGENT_SYSTEM = `You are a professional booking agent AI assistant for CHAP (Carlos Ochoa), a DJ and producer based in Mérida, Yucatán, Mexico.
+const AGENT_SYSTEM = `You are **MAYA**, an international artist manager and booking strategist for CHAP (Carlos Ochoa), a melodic house / indie dance / progressive melodic techno DJ and producer based in Mérida, México.
 
-ARTIST PROFILE:
-- Name: CHAP (Carlos Ochoa)
-- Based: Mérida, Yucatán, Mexico
-- DJ Instagram: @djchap — https://www.instagram.com/djchap
-- Producer alias: Co8a — @co8amusic
-- Spotify (as Co8a): https://open.spotify.com/artist/7uvVmW54GdRghd7Pm9GVX6
-- Mixcloud: https://www.mixcloud.com/djchapmx/
-- SoundCloud: https://soundcloud.com/co8as
-- YouTube: https://youtube.com/@co8amusicofficial
-- Genre: Melodic House, Indie Dance, Progressive Melodic Techno
-- Setup: Digital + Vinyl
-- Career: 28+ years (since 1996, Festival Cervantino)
-- 2003: Arteria Records — Loveparade MX (Av. Reforma, 20,000 pax), Toltécnica Fest (Teotihuacán)
-- Current venues: Ancestro MX, Confessions (Cancún), Classico Peninsula, Ignoto, Casa Revo (Cd del Carmen), Azotea, Vanite, Vientooo
-- Upcoming: Vanta Room Campeche (Jun 12), Sala Sala Mérida vinyl set (Jun 17), Lady Lee Rooftop Guadalajara (Jun 26), Tempo Querétaro (Jun 27)
-- Shared stage: Lee Burridge, Pig & Dan, Iñigo Vontier, PillowTalk, Bostich, Sian, Oriol Calvo, Blondish, Nortec Colective, Chus & Ceballos, Boris, Pulsar, Sean Toja, Rodriguez Jr., Harry Romero and many more
-- Labels: Toltécnica Records, Euforia en la Red, Holographic Music, TechMex Music, Trauman Recordings, Array Records
-- Booking: djchap@gmail.com
+Your job is to act as a proactive A&R and booking manager with a global mindset. You think like a talent agent: you identify opportunities, craft persuasive outreach, build strategic calendars, and secure gigs across continents — from boutique beach clubs in Tulum to underground venues in Berlin, festivals in Coachella to rooftop bars in Tokyo.
 
-PITCH RULES:
-1. Instagram DMs: SHORT (max 5-6 lines), casual but confident, include hook
-2. Emails: structured with subject line, include 2-3 shared stage names
-3. Always include: Mixcloud + SoundCloud + YouTube + Spotify links
-4. Mention both handles: @djchap (DJ) and @co8amusic (producer)
-5. Mention vinyl + digital setup for boutique venues
-6. After pitch add 2-3 "VENUE TIPS" for that specific market
-7. Adapt tone: beach/boutique = casual; clubs/festivals = more formal
-8. Write in Spanish by default, English if requested
-9. No fluff — confident, direct, let credentials speak
+ARTIST PROFILE — CHAP / CO8A:
+• Real name: Carlos Ochoa
+• Based: Mérida, Yucatán, México
+• 28+ años de carrera profesional (since 1996)
+• Vinil + Digital setup (boutique & underground friendly)
+• Sonidos: Melodic House, Indie Dance, Progressive Melodic Techno
+• DJ: @djchap (Instagram) — https://www.instagram.com/djchap
+• Producer: @co8amusic (Instagram), Spotify artist: https://open.spotify.com/artist/7uvVmW54GdRghd7Pm9GVX6
+• Mixcloud: https://www.mixcloud.com/djchapmx/
+• SoundCloud: https://soundcloud.com/co8as
+• YouTube: https://youtube.com/@co8amusicofficial
+• Labels propios: Toltécnica Records, Euforia en la Red, Holographic Music, TechMex Music, Trauman Recordings, Array Records
+• Shared stages: Lee Burridge, Pig & Dan, Iñigo Vontier, PillowTalk, Bostich, Sian, Oriol Calvo, Blondish, Nortec Colective, Chus & Ceballos, Boris, Pulsar, Sean Toja, Rodriguez Jr., Harry Romero y más
+• Bookings: djchap@gmail.com | +52 1 999 123 4567
 
-Always be concise and confident.`;
+CURRENT / UPCOMING BOOKINGS:
+• Vanta Room Campeche (Jun 12) — vinyl set
+• Sala Sala Mérida (Jun 17) — vinyl set
+• Lady Lee Rooftop Guadalajara (Jun 26)
+• Tempo Querétaro (Jun 27)
+
+MANAGER BEHAVIOR:
+1. Act as Maya, an experienced international booking manager who has placed artists at Coachella, Movement Detroit, CRSSD, DC10 Ibiza, Rex Club Paris, Watergate Berlin, and boutique venues across LATAM, EU y Asia.
+2. Always have a strategic mindset: look at the calendar, fill gaps, propose tours/routes, identify market gaps (e.g., "Japan needs CHAP in 2026").
+3. Craft outreach in 3 formats: Instagram DM (short, hook, casual-confident), Email (structured, subject line, social proof), Follow-up (amigable pero con urgencia).
+4. Always include: Mixcloud + SoundCloud + YouTube + Spotify links + both handles (@djchap y @co8amusic).
+5. Mention the vinyl + digital setup for boutique venues.
+6. Adapt tone: beach/boutique = casual; clubs/festivals = formal.
+7. Provide 2-3 "VENUE TIPS" for each market (quiénescontactar, cuándo, qué tipo de booking).
+8. Escribe en español por defecto, English on request.
+9. Proactively propose: festival applications, label showcases, radio shows, podcast invites, remix opportunities.
+10. Think like a strategist: "What's the next move?" — suggest next markets, collaborations, or seasonal campaigns.
+
+Your tone is confident, strategic, and slightly bold — you're selling a 28-year veteran with credibility. No fluff. Let credentials speak. Siempre termina con una acción concreta o una pregunta estratégica que impulse al manager (el usuario) a actuar.
+
+You are ready.`;
+
 
 const agentMessages = [
   {role:'user', content: AGENT_SYSTEM + '\n\nYou are ready.'},
@@ -1082,10 +1090,15 @@ const agentMessages = [
 
 const agentPresets = {
   dm_es: 'Escríbeme un DM de Instagram en español para un venue underground en Oaxaca. Tipo bar/club bohemio.',
-  dm_en: 'Write me an Instagram DM in English for a boutique beach venue in Sayulita. Upscale international crowd.',
+  dm_en: 'Write an Instagram DM in English for a boutique beach venue in Sayulita. Upscale international crowd. Propose a sunset set.',
   email_es: 'Escríbeme un email de booking formal en español para un club en Guadalajara. Incluye asunto.',
   followup: 'Escríbeme un follow-up para un venue que no respondió en 2 semanas. Amigable pero crea urgencia. En español.',
-  summer: 'Dame 3 DMs rápidos para: 1) San Cristóbal de las Casas underground, 2) Querétaro club, 3) San Miguel de Allende rooftop boutique. Todos en español.'
+  summer: 'Dame 3 DMs rápidos para: 1) San Cristóbal de las Casas underground, 2) Querétaro club, 3) San Miguel de Allende rooftop boutique. Todos en español.',
+  berlin: 'Write a formal booking email in English to a Berlin underground club (e.g., Watergate, ://about blank, Griessmuehle). Include shared stage credits and vinyl setup. Propose dates in Q3 2026.',
+  tokyo: 'Write an Instagram DM in English for a Tokyo rooftop bar (e.g., Two Rooms, 1OAK). Boutique international crowd. Propose a sunset melodic set. Include Japanese cultural tip.',
+  coachella: 'Draft a formal artist submission email for Coacheline 2027. Include bio highlights, streaming numbers, and why CHAP fits the Mojave tent.',
+  ibiza: 'Write a booking proposal for a sunset boat party or beach club in Ibiza (e.g., Blue Marlin, Experimental). Spanish/English bilingual tone. Propose 2 dates.',
+  ladpm: 'Escribe un email en español para una radio show en Monterrey (ej. Radioglobal, MVS). Propón una sesión de 30 min con tracklist y promoción cruzada.',
 };
 
 function loadAgentPreset(key) {
@@ -1107,6 +1120,9 @@ function addAgentMsg(role, text) {
   box.scrollTop = box.scrollHeight;
 }
 
+// HERMES AGENT: Endpoint configurable. En dev usar localhost, en prod usar hermes.agent.url
+const HERMES_AGENT_ENDPOINT = window.HERMES_AGENT_ENDPOINT || 'http://localhost:8000/agent';
+
 async function sendAgent() {
   const input = document.getElementById('agent-input');
   const text = input.value.trim();
@@ -1121,27 +1137,59 @@ async function sendAgent() {
   document.getElementById('chat-messages').appendChild(thinkingWrap);
   document.getElementById('chat-messages').scrollTop = 99999;
 
-  try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body: JSON.stringify({
-        model:'claude-sonnet-4-20250514',
-        max_tokens:1000,
-        system: AGENT_SYSTEM,
-        messages: agentMessages.slice(2)
-      })
-    });
-    const data = await res.json();
-    const reply = data.content?.[0]?.text || 'Error al generar respuesta.';
-    thinkingWrap.remove();
-    agentMessages.push({role:'assistant', content:reply});
-    addAgentMsg('assistant', reply);
-  } catch(e) {
-    thinkingWrap.remove();
-    addAgentMsg('assistant', 'Error de conexión. Intenta de nuevo.');
+  let attempts = 0, maxRetries = 3;
+  while(attempts < maxRetries) {
+    try {
+      const res = await fetch(HERMES_AGENT_ENDPOINT, {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          system: AGENT_SYSTEM,
+          messages: agentMessages.slice(2),
+          max_tokens: 1000
+        })
+      });
+
+      if(!res.ok) throw new Error(`HTTP ${res.status}`);
+
+      const data = await res.json();
+      const reply = data.reply || data.content?.[0]?.text || 'Error al generar respuesta.';
+      thinkingWrap.remove();
+      agentMessages.push({role:'assistant', content:reply});
+      addAgentMsg('assistant', reply);
+      localStorage.setItem('hermesAgentHistory', JSON.stringify(agentMessages));
+      return;
+    } catch(e) {
+      attempts++;
+      if(attempts >= maxRetries) {
+        thinkingWrap.remove();
+        addAgentMsg('assistant', 'Error de conexión. Intenta de nuevo. (Hermes Agent)');
+        console.error('Agent request failed after retries:', e);
+        return;
+      }
+      await new Promise(r => setTimeout(r, 500 * attempts));
+    }
   }
 }
+
+// Restaurar historial del agente desde localStorage al cargar
+window.addEventListener('DOMContentLoaded', () => {
+  const saved = localStorage.getItem('hermesAgentHistory');
+  if(saved) {
+    try {
+      const parsed = JSON.parse(saved);
+      if(Array.isArray(parsed) && parsed.length > 2) {
+        agentMessages.length = 0;
+        agentMessages.push(...parsed);
+        const box = document.getElementById('chat-messages');
+        box.innerHTML = '';
+        for(const msg of agentMessages.slice(2)) {
+          addAgentMsg(msg.role, msg.content);
+        }
+      }
+    } catch(e) { console.warn('No se pudo restaurar historial del agente:', e); }
+  }
+});
 </script>
 
 <div class="div"></div>
