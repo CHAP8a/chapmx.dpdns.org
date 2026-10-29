@@ -856,17 +856,15 @@
 </div></section>
 
 <script>
-function unlockAgent(){
+async function unlockAgent(){
   const email = document.getElementById('lock-email').value.trim().toLowerCase();
   const pass = document.getElementById('lock-pass').value;
   const err = document.getElementById('lock-err');
-  if(email === 'djchap@gmail.com' && pass === '8aCarlos'){
-    document.getElementById('agent-lock').classList.add('unlocked');
-    err.style.display = 'none';
-  } else {
-    err.style.display = 'block';
-    document.getElementById('lock-pass').value = '';
-  }
+  err.style.display = 'block';
+  err.textContent = 'ACCESO DESHABILITADO: falta configurar autenticación segura en el servidor.';
+  document.getElementById('lock-pass').value = '';
+  // Never validate credentials in public browser code. Configure a protected server endpoint
+  // before re-enabling this feature.
 }
 
 const AGENT_SYSTEM = `You are **MAYA**, an international artist manager and booking strategist for CHAP (Carlos Ochoa), a melodic house / indie dance / progressive melodic techno DJ and producer based in Mérida, México.
